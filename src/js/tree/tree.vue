@@ -20,7 +20,7 @@
   import emitter from '../mixins/emitter';
 
   export default {
-    name: 'ElTree',
+    name: 'tree',
 
     mixins: [emitter],
 
