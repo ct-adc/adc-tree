@@ -67,3 +67,8 @@ AreaTree是对tree进行了一层封装，只用于地区选择;
 参数形如：["浙江","安徽","福建","江西-南昌","江西-赣州-章贡区"]或"浙江,安徽,福建,江西-南昌,江西-赣州-章贡区"
 
 如上，会选中浙江省、安徽省、福建省、江西省南昌市、江西省赣州市章贡区
+
+
+## changeLog
+
+[changeLog](https://github.com/ct-adc/adc-tree/blob/master/changeLog.md)
