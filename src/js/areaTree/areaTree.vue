@@ -46,6 +46,7 @@
                         areaList=areaToAdd.split(/,|，/);
                     }
                 }
+                areaList=areaToAdd;
                 areaList.map((item)=> {
                     nodes = nodes.concat(dataTransfer.getNodesByName(item));
                 });

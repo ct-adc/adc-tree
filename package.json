@@ -1,7 +1,7 @@
 {
   "name": "ct-adc-tree",
   "description": "A Vue.js project",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": "skysunshine99 <skysunshine99@126.com>",
   "private": false,
   "scripts": {
