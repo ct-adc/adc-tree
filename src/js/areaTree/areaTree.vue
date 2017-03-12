@@ -39,10 +39,12 @@
             setChecked(areaToAdd){
                 var nodes = [];
                 var areaList;
-                try{
-                    areaList=JSON.parse(areaToAdd);
-                }catch(e){
-                    areaList=areaToAdd.split(/,|，/);
+                if(typeof(areaToAdd)==='string'){
+                    try{
+                        areaList=JSON.parse(areaToAdd);
+                    }catch(e){
+                        areaList=areaToAdd.split(/,|，/);
+                    }
                 }
                 areaList.map((item)=> {
                     nodes = nodes.concat(dataTransfer.getNodesByName(item));
