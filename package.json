@@ -1,10 +1,11 @@
 {
   "name": "ct-adc-tree",
   "description": "A Vue.js project",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "author": "skysunshine99 <skysunshine99@126.com>",
   "private": false,
   "scripts": {
+    "publish":"webpack --config publish.config.js",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --inline --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },

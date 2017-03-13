@@ -22,7 +22,7 @@ export default class TreeStore {
         if (this.lazy && this.load) {
             const loadFn = this.load;
             loadFn(this.root, (data) => {
-                this.root.doCreateChildren(data);
+                this.root.doCreateChildren(data);//TODO
                 this._initDefaultCheckedNodes();
             });
         } else {
@@ -102,7 +102,6 @@ export default class TreeStore {
     _initDefaultCheckedNodes() {
         const defaultCheckedKeys = this.defaultCheckedKeys || [];
         const nodesMap = this.nodesMap;
-
         defaultCheckedKeys.forEach((checkedKey) => {
             const node = nodesMap[checkedKey];
 
@@ -242,7 +241,6 @@ export default class TreeStore {
                 node.setChecked(checked, false);
             }
         });
-        console.log(allNodes)
     }
 
     setCheckedNodes(array, leafOnly = false) {

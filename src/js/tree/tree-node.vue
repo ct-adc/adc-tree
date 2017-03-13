@@ -28,18 +28,32 @@
       <node-content :node="node"></node-content>
     </div>
     <collapse-transition>
-      <div
-        class="el-tree-node__children"
-        v-if="expanded"
-        v-show="expanded">
-        <el-tree-node
-          :render-content="renderContent"
-          v-for="child in node.childNodes"
-          :key="getNodeKey(child)"
-          :node="child"
-          @node-expand="handleChildNodeExpand">
-        </el-tree-node>
-      </div>
+      <template v-if="!childNodeRendered">
+        <div class="el-tree-node__children"
+             v-if="expanded">
+          <el-tree-node
+                  :render-content="renderContent"
+                  v-for="child in node.childNodes"
+                  :key="getNodeKey(child)"
+                  :node="child"
+                  @node-expand="handleChildNodeExpand">
+          </el-tree-node>
+        </div>
+      </template>
+        <template v-if="childNodeRendered">
+          <div class="el-tree-node__children"
+               v-show="expanded">
+            <el-tree-node
+                    :render-content="renderContent"
+                    v-for="child in node.childNodes"
+                    :key="getNodeKey(child)"
+                    :node="child"
+                    @node-expand="handleChildNodeExpand">
+            </el-tree-node>
+          </div>
+        </template>
+
+
     </collapse-transition>
   </div>
 </template>

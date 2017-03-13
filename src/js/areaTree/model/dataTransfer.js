@@ -2,7 +2,7 @@
  * @author rubyisapm
  */
 export default{
-    getAreaNameById(id) {
+    getAreaNameById(id,sep) {
         var provinceId = id.substr(0, 2),
             cityId = id.length > 2 ? id.substr(0, 4) : '',
             regionId = id.length > 4 ? id.substr(0, 6) : '';
@@ -16,33 +16,44 @@ export default{
         var regionName = regionId !== '' ? AREA.region[cityName].filter((item)=> {
             return item.ID === regionId;
         })[0].Name : '';
+        sep=sep || '-';
         if (id.length === 2) {
             return provinceName;
         } else if (id.length === 4) {
-            return provinceName + '-' + cityName;
+            return provinceName + sep + cityName;
         } else if (id.length == 6) {
-            return provinceName + '-' + cityName + '-' + regionName;
+            return provinceName + sep + cityName + sep + regionName;
         }
     },
 
-    getNodesByName(name) {
-        name = name.split('-');
+    getNodesByName(name,sep) {
+        sep=sep || '-';
+        name = name.split(sep);
         var provinceName = name[0];
         var cityName = name[1];
         var regionName = name[2];
         var nodes = [];
-        if (name.length === 1) {
+        if (name.length === 1){
             var cities = AREA.city[provinceName];
-            cities.map((city)=> {
-                var region = AREA.region[city.Name];
-                nodes = nodes.concat(region);
-            })
+            if(typeof cities!=='undefined' && cities.length>0){
+                cities.map((city)=> {
+                    var region = AREA.region[city.Name];
+                    if(typeof region!=='undefined' && region.length>0){
+                        nodes = nodes.concat(region);
+                    }else{
+                        nodes.push(city);
+                    }
+                })
+            }
         } else if (name.length === 2) {
-            nodes = AREA.region[cityName];
+            nodes = AREA.region[cityName] || [];
         } else {
-            nodes = AREA.region[cityName].filter((region)=> {
-                return region.Name === regionName;
-            })
+            var regions=AREA.region[cityName];
+            if(typeof regions!=='undefined' && regions.length>0){
+                nodes = AREA.region[cityName].filter((region)=> {
+                    return region.Name === regionName;
+                })
+            }
         }
         return nodes;
     },

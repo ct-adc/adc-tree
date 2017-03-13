@@ -1,5 +1,14 @@
 ## 更新日志
 
+### 0.0.4
+
+*2017-03-13*
+
+- 修复 areaTree中setChecked兼容问题
+- 修复 areaTree dataTransfer中getNodesByName对于不匹配的名称的容错
+- 增加 areaTree添加sep属性，用来自定义分隔符
+- 增加 areaTree添加change事件，当选择的节点发生变化时触发该事件
+
 ### 0.0.3
 
 *2017-03-12*

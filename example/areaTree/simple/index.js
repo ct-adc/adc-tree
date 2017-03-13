@@ -10,7 +10,8 @@ new Vue({
     },
     data:{
         areaToAdd:'',
-        result:''
+        result:'',
+        sep:'_'
     },
     methods:{
         getChecked(){
@@ -18,6 +19,9 @@ new Vue({
         },
         setChecked(){
             this.$refs.areaTree.setChecked(this.areaToAdd);
+        },
+        change(data){
+            this.result=JSON.stringify(data);
         }
     }
 });
