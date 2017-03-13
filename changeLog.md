@@ -8,6 +8,7 @@
 - 修复 areaTree dataTransfer中getNodesByName对于不匹配的名称的容错
 - 增加 areaTree添加sep属性，用来自定义分隔符
 - 增加 areaTree添加change事件，当选择的节点发生变化时触发该事件
+- 修复 areaTree非三层地区的选中bug
 
 ### 0.0.3
 
