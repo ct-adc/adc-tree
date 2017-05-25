@@ -15,7 +15,6 @@
 </template>
 
 <script type="es6">
-  import '../../css/tree.css';
   import TreeStore from './model/tree-store';
   import emitter from '../mixins/emitter';
 
@@ -172,3 +171,31 @@
     }
   };
 </script>
+
+<style scoped>
+    @charset "UTF-8";
+    .el-tree {
+        cursor: default;
+        background: #fff;
+    }
+
+    .el-tree__empty-block {
+        position: relative;
+        min-height: 60px;
+        text-align: center;
+        width: 100%;
+        height: 100%
+    }
+
+    .el-tree__empty-text {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        color: #5e7382
+    }
+    .el-tree--highlight-current .el-tree-node.is-current > .el-tree-node__content {
+        background-color: #edf7ff
+    }
+</style>

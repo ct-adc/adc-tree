@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>list</title>
+    <link href="http://static.tcy365.com/cdn/bootstrap/3.3.5/css/bootstrap.dz.min.css" rel="stylesheet">
+    <link href="http://static.tcy365.com/cdn/bootstrap/3.3.5/css/theme.css" rel="stylesheet">
+    <script src="http://static.tcy365.com/cdn/component/area/2.0.0/area.min.js"></script>
+</head>
+<body>
+
+<div id="app">
+    <div class="container">
+        <div class="col-sm-4">
+            <div class="panel panel-default" style="height:145px;">
+                <textarea cols="30" rows="10" v-model="areaToAddAuto" style="width:100%;height:100%;border:none" placeholder="该处的内容会被自动解析并选中地区"></textarea>
+            </div>
+            <div class="panel panel-default" style="height:145px;">
+                <textarea cols="30" rows="10" v-model="areaToAddManually" style="width:100%;height:100%;border:none" placeholder="该处的内容编辑后点击“设置选中地区”按钮选中地区"></textarea>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="panel panel-default" style="height:300px;overflow-y:scroll;">
+                <area-tree :selected="areaToAddAuto" ref="areaTree" :sep="sep" @change="change">
+
+                </area-tree>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="panel panel-default" style="height:300px;">
+                <div class="panel-heading">
+                    <h3 class="panel-title">此处展示选中的地区结果(ID | Name)</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-6" style="word-wrap: break-word;word-break: break-all;">
+                        {{resultWithId}}
+                    </div>
+                    <div class="col-sm-6">
+                        {{resultWithName}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="text-center mt20">
+        <button type="button" class="btn btn-primary" @click="setChecked">设置选中地区</button>
+        <button type="button" class="btn btn-warning" @click="getChecked">获取选中地区</button>
+    </div>
+</div>
+
+
+<script src="http://static.tcy365.com/cdn/jquery/2.1.0/jquery.js"></script>
+<script src="http://static.tcy365.com/cdn/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="/asset/js/area-tree.bundle.js"></script>
+</body>
+</html>

@@ -226,3 +226,80 @@
     }
   };
 </script>
+<style scoped>
+    @charset "UTF-8";
+    .el-tree-node {
+        white-space: nowrap
+    }
+
+    .el-tree-node > .el-tree-node__children {
+        overflow: hidden;
+        background-color: transparent
+    }
+
+    .el-tree-node.is-expanded > .el-tree-node__children {
+        display: block
+    }
+
+    .el-tree-node__expand-icon, .el-tree-node__label, .el-tree-node__loading-icon {
+        display: inline-block;
+        vertical-align: middle
+    }
+
+    .el-tree-node__content {
+        line-height: 28px;
+        height: 28px;
+        cursor: pointer
+    }
+
+    .el-tree-node__content > .el-checkbox, .el-tree-node__content > .el-tree-node__expand-icon {
+        margin-right: 8px
+    }
+
+    .el-tree-node__content > .el-checkbox {
+        vertical-align: middle;
+        margin-bottom: 0
+    }
+
+    .el-tree-node__content:hover {
+        background: #e4e8f1
+    }
+
+    .el-tree-node__expand-icon {
+        cursor: pointer;
+        width: 0;
+        height: 0;
+        margin-left: 10px;
+        border: 4px solid transparent;
+        border-right-width: 0;
+        border-left-color: #97a8be;
+        border-left-width: 6px;
+        -ms-transform: rotate(0);
+        transform: rotate(0);
+        transition: transform .3s ease-in-out
+    }
+
+    .el-tree-node__expand-icon:hover {
+        border-left-color: #999
+    }
+
+    .el-tree-node__expand-icon.expanded {
+        -ms-transform: rotate(90deg);
+        transform: rotate(90deg)
+    }
+
+    .el-tree-node__expand-icon.is-leaf {
+        border-color: transparent;
+        cursor: default
+    }
+
+    .el-tree-node__label {
+        font-size: 12px
+    }
+
+    .el-tree-node__loading-icon {
+        margin-right: 4px;
+        font-size: 12px;
+        color: #97a8be
+    }
+</style>

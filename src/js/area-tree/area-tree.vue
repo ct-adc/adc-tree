@@ -12,9 +12,8 @@
 <script type="es6">
     import Vue from 'vue';
     import tree from '../../js/tree/tree.vue';
-    import dataTransfer from './model/dataTransfer.js';
-    import '../../css/checkbox.css';
-    import '../../css/tree.css';
+    import dataTransfer from './model/data-transfer.js';
+    import utility from 'ct-utility';
     export default{
         name:'area-tree',
         components:{
@@ -25,7 +24,7 @@
                 type:String,
                 default:'-'
             },
-            areaToAdd:{
+            selected:{
                 type:[Array,String],
                 default(){
                     return [];
@@ -37,8 +36,14 @@
                 loadNode:dataTransfer.loadNode
             };
         },
+        mounted(){
+            this.setChecked(this.selected);
+        },
         methods:{
-            getChecked(){
+            /**
+             * @param {Boolean} readable 可读时返回地区名称，否则返回地区id
+             */
+            getChecked(readable){
                 var that=this;
                 var checkedKeys = this.$refs.areaList.getCheckedKeys(false);
                 checkedKeys.sort()
@@ -47,12 +52,16 @@
                     var regionOfHasC = item.length == 6 && arr.indexOf(item.substr(0, 4)) > -1;
                     return !(cityOfHasP || regionOfHasC);
                 });
-                return filtered.map((item)=> {
-                    return dataTransfer.getAreaNameById(item,that.sep);
-                });
+                if(readable){
+                    return filtered.map((item)=> {
+                        return utility.areaDataFormat.getAreaNameById(item,that.sep);
+                    });
+                }else{
+                    return filtered;
+                }
+
             },
             setChecked(areaToAdd){
-                var that=this;
                 var nodes = [];
                 var areaList;
                 if(typeof(areaToAdd)==='string'){
@@ -69,18 +78,29 @@
                     areaList=areaToAdd;
                 }
                 if(areaList.length>0){
-                    areaList.map((item)=> {
-                        nodes = nodes.concat(dataTransfer.getNodesByName(item,that.sep));
-                    });
+                    if(/^\d+$/.test(areaList[0]+'')){
+                        areaList.map((item)=> {
+                            nodes = nodes.concat(dataTransfer.getNodesById(item+''));
+                        });
+                    }else{
+                        areaList.map((item)=> {
+                            nodes = nodes.concat(dataTransfer.getNodesByName(item));
+                        });
+                    }
                 }
                 this.$refs.areaList.setCheckedNodes(nodes);
             },
             checkedChange(){
                 var that=this;
                 setTimeout(function(){
-                    that.$emit('change',that.getChecked());
+                    that.$emit('change',that.getChecked(true));
                 })
                 //父节点的change会触发所有子节点的change，所以需要放在异步事件中$emit事件，保证值的正确性
+            }
+        },
+        watch:{
+            selected(newVal){
+                this.setChecked(newVal)
             }
         }
     }

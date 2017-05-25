@@ -34,8 +34,7 @@ tree的使用方法请参照[element-tree](http://localhost:8085/#/zh-CN/compone
 
 ```
 import Vue from 'vue';
-import AreaTree from 'ct-adc-tree/lib/areaTree/areaTree.js';
-import 'ct-adc-tree/lib/areaTree/areaTree.css';
+import AreaTree from 'ct-adc-tree/lib/areaTree.js';
 
 Vue.component(AreaTree.name,AreaTree);
 或
@@ -50,9 +49,29 @@ new Vue({
 
 AreaTree是对tree进行了一层封装，只用于地区选择;
 
+#### 参数
+
+参数|描述|类型|默认值
+--- | --- | --- | --- |
+sep | 地区分隔符 | String | '-'
+selected | 需要选中的地区 | String | Array | []
+
+**备注** selected格式
+
+*支持字符串*: 以',|，'分隔单个地区的字符串如'浙江-杭州,江苏'或'0601,04')
+
+*支持数组*: 如['浙江-杭州','江苏']或['0601','04']
+
+*支持JSON字符串*: 如["0601"]或["浙江-杭州"]，`请勿误用['0601']、['浙江-杭州']等非法JSON，会导致结果非预期`。
+
 #### 方法
 
 ##### getChecked
+
+参数: readable Boolean 非必填 默认为false
+
+**true:** 返回地区名称
+**false:** 返回地区ID
 
 获取选中的地区
 

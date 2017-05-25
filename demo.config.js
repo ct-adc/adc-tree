@@ -7,7 +7,7 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, './lib'),
-        filename: '[name].common.js',
+        filename: '[name].demo.js',
         library: 'ct-adc-[name]',
         libraryTarget: 'umd'
     },
@@ -37,20 +37,23 @@ module.exports = {
         alias: {
             'vue$': 'vue/dist/vue.common.js'
         }
-    },
-    externals: [
-        function(context, request, callback) {
-            if (/^vue$/.test(request)){
-                return callback(null, 'commonjs ' + request);
-            }
-            callback();
-        },
-        function(context, request, callback) {
-            if (/^ct-utility$/.test(request)){
-                return callback(null, 'commonjs ' + request);
-            }
-            callback();
-        }
-    ]
+    }
+    //externals: {
+        //function(context, request, callback) {
+        //    if (/^vue$/.test(request)){
+        //        return callback(null, 'commonjs ' + request);
+        //    }
+        //    callback();
+        //},
+        //function(context, request, callback) {
+        //    if (/^ct-utility$/.test(request)){
+        //        return callback(null, 'commonjs ' + request);
+        //    }
+        //    callback();
+        //}
+        //'ct-utility': 'utility',
+        //'vue':'Vue'
+
+    //}
 };
 

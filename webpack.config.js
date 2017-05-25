@@ -1,11 +1,9 @@
 var path = require('path');
 var webpack = require('webpack');
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
-var extractCSS = new ExtractTextPlugin('css/[name].min.css');
 module.exports = {
     entry: {
         tree: './example/tree/simple/index.js',
-        areaTree:'./example/areaTree/simple/index.js'
+        'area-tree': './example/area-tree/simple/index.js'
     },
     output: {
         path: path.resolve(__dirname, './asset'),
@@ -14,17 +12,12 @@ module.exports = {
     },
     module: {
         rules: [
-            //{
-            //    enforce: 'pre',
-            //    test: /\.js$/,
-            //    exclude: /node_modules/,
-            //    loader: "jshint-loader"
-            //},
             {
                 test: /\.vue$/,
                 loader: 'vue-loader',
                 options: {
                     loaders: {
+                        'css':'vue-style-loader!css-loader',
                         'scss': 'vue-style-loader!css-loader!sass-loader',
                         'sass': 'vue-style-loader!css-loader!sass-loader?indentedSyntax'
                     }
@@ -38,8 +31,8 @@ module.exports = {
             {
                 test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/,
                 loader: 'file-loader',
-                options:{
-                    name:'font/[name].[text]?[hash]'
+                options: {
+                    name: 'font/[name].[text]?[hash]'
                 }
             },
             {
@@ -48,10 +41,6 @@ module.exports = {
                 options: {
                     name: 'img/[name].[ext]?[hash]'
                 }
-            },
-            {
-                test: /\.css$/,
-                loader: extractCSS.extract(['css-loader'])
             }
         ]
     },
@@ -75,7 +64,6 @@ module.exports = {
         hints: false
     },
     devtool: '#eval-source-map',
-    plugins: [extractCSS]
 };
 
 if (process.env.NODE_ENV === 'production') {
