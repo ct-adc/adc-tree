@@ -14,8 +14,7 @@ npm install 'ct-adc-tree'
 
 ```
 import Vue from 'vue';
-import Tree from 'ct-adc-tree/lib/tree/tree.js';
-import 'ct-adc-tree/lib/tree/tree.css';
+import * as Tree from 'ct-adc-tree/lib/tree.common.js';
 
 Vue.component(Tree.name,Tree);
 或
@@ -34,7 +33,7 @@ tree的使用方法请参照[element-tree](http://localhost:8085/#/zh-CN/compone
 
 ```
 import Vue from 'vue';
-import AreaTree from 'ct-adc-tree/lib/areaTree.js';
+import * as AreaTree from 'ct-adc-tree/lib/area-tree.common.js';
 
 Vue.component(AreaTree.name,AreaTree);
 或
@@ -96,3 +95,10 @@ selected | 需要选中的地区 | String | Array | []
 ## changeLog
 
 [changeLog](https://github.com/ct-adc/adc-tree/blob/master/changeLog.md)
+
+
+## lib文件介绍
+
+* *.common.js 开发者使用
+
+* *.demo.js 仅供demo使用
