@@ -48,6 +48,8 @@ new Vue({
 
 AreaTree是对tree进行了一层封装，只用于地区选择;
 
+#### [在线demo](https://codepen.io/rubyisapm/pen/xdBqKO)
+
 #### 参数
 
 参数|描述|类型|默认值
