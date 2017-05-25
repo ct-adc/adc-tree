@@ -37,23 +37,9 @@ module.exports = {
         alias: {
             'vue$': 'vue/dist/vue.common.js'
         }
+    },
+    externals: {
+        'vue':'Vue'
     }
-    //externals: {
-        //function(context, request, callback) {
-        //    if (/^vue$/.test(request)){
-        //        return callback(null, 'commonjs ' + request);
-        //    }
-        //    callback();
-        //},
-        //function(context, request, callback) {
-        //    if (/^ct-utility$/.test(request)){
-        //        return callback(null, 'commonjs ' + request);
-        //    }
-        //    callback();
-        //}
-        //'ct-utility': 'utility',
-        //'vue':'Vue'
-
-    //}
 };
 
