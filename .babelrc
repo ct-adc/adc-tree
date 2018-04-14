@@ -1,7 +1,13 @@
 {
   "presets": [
-    ["es2015", { "modules": false }],
+    ["env"]
   ],
-  "plugins": ["transform-runtime","transform-vue-jsx"],
-  "comments": false
+  "plugins": ["transform-runtime", "transform-vue-jsx"],
+  "comments": false,
+  "env": {
+    "test": {
+      "presets": ["env"],
+      "plugins": [ "istanbul" ]
+    }
+  }
 }
