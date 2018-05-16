@@ -54,7 +54,7 @@
             },
             hasFilter: {
                 type: Boolean,
-                default: false
+                default: true
             }
         },
         data() {
@@ -136,6 +136,7 @@
                         });
                     }
                 }
+                nodes=[{ID: '0601'}];
                 this.$refs.areaList.setCheckedNodes(nodes);
             },
             checkedChange() {
