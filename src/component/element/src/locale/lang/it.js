@@ -16,10 +16,6 @@ export default {
       startTime: 'Ora inizio',
       endDate: 'Data fine',
       endTime: 'Ora fine',
-      prevYear: 'Anno precedente',
-      nextYear: 'Anno successivo',
-      prevMonth: 'Mese precedente',
-      nextMonth: 'Mese successivo',
       year: 'Anno',
       month1: 'Gennaio',
       month2: 'Febbraio',
@@ -61,12 +57,11 @@ export default {
     select: {
       loading: 'Caricamento',
       noMatch: 'Nessuna corrispondenza',
-      noData: 'Nessun dato',
+      noData: 'Nessun risultato',
       placeholder: 'Seleziona'
     },
     cascader: {
       noMatch: 'Nessuna corrispondenza',
-      loading: 'Caricamento',
       placeholder: 'Seleziona'
     },
     pagination: {
@@ -81,7 +76,6 @@ export default {
       error: 'Input non valido'
     },
     upload: {
-      deleteTip: 'Premi cancella per rimuovere',
       delete: 'Cancella',
       preview: 'Anteprima',
       continue: 'Continua'
@@ -90,19 +84,10 @@ export default {
       emptyText: 'Nessun dato',
       confirmFilter: 'Conferma',
       resetFilter: 'Reset',
-      clearFilter: 'Tutti',
-      sumText: 'Somma'
+      clearFilter: 'Tutti'
     },
     tree: {
       emptyText: 'Nessun dato'
-    },
-    transfer: {
-      noMatch: 'Nessuna corrispondenza',
-      noData: 'Nessun dato',
-      titles: ['Lista 1', 'Lista 2'],
-      filterPlaceholder: 'Inserisci filtro',
-      noCheckedFormat: '{total} elementi',
-      hasCheckedFormat: '{checked}/{total} selezionati'
     }
   }
 };

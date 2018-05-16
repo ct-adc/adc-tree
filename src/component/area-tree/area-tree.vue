@@ -54,7 +54,7 @@
             },
             hasFilter: {
                 type: Boolean,
-                default: false
+                default: true
             }
         },
         data() {
@@ -65,6 +65,9 @@
             };
         },
         mounted() {
+            // this.$refs.areaList.setCheckedNodes([{ID: '0601', Name: '杭州'}]);
+            // this.$refs.areaList.setCheckedKeys(['0601']);
+            console.log(this.selected);
             this.setChecked(this.selected);
         },
         computed: {
@@ -136,9 +139,11 @@
                         });
                     }
                 }
+                console.log(nodes);
                 this.$refs.areaList.setCheckedNodes(nodes);
             },
             checkedChange() {
+                console.log('change');
                 var that = this;
                 setTimeout(function() {
                     that.$emit('change', that.getChecked(true));

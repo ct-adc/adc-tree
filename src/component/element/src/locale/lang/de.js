@@ -16,14 +16,10 @@ export default {
       startTime: 'Startzeit',
       endDate: 'Enddatum',
       endTime: 'Endzeit',
-      prevYear: 'Letztes Jahr',
-      nextYear: 'Nächtes Jahr',
-      prevMonth: 'Letzter Monat',
-      nextMonth: 'Nächster Monat',
       day: 'Tag',
       week: 'Woche',
       month: 'Monat',
-      year: '',
+      year: 'Jahr',
       month1: 'Januar',
       month2: 'Februar',
       month3: 'März',
@@ -63,17 +59,16 @@ export default {
     select: {
       loading: 'Lädt.',
       noMatch: 'Nichts gefunden.',
-      noData: 'Keine Daten',
-      placeholder: 'Daten wählen'
+      noData: 'Keine Datei',
+      placeholder: 'Datei wählen'
     },
     cascader: {
       noMatch: 'Nichts gefunden.',
-      loading: 'Lädt.',
-      placeholder: 'Daten wählen'
+      placeholder: 'Datei wählen'
     },
     pagination: {
       goto: 'Gehe zu',
-      pagesize: ' pro Seite',
+      pagesize: 'pro Seite',
       total: 'Gesamt {total}',
       pageClassifier: ''
     },
@@ -83,7 +78,6 @@ export default {
       error: 'Fehler'
     },
     upload: {
-      deleteTip: 'Klicke löschen zum entfernen',
       delete: 'Löschen',
       preview: 'Vorschau',
       continue: 'Fortsetzen'
@@ -92,19 +86,10 @@ export default {
       emptyText: 'Keine Daten',
       confirmFilter: 'Anwenden',
       resetFilter: 'Zurücksetzen',
-      clearFilter: 'Alles ',
-      sumText: 'Summe'
+      clearFilter: 'Alles '
     },
     tree: {
-      emptyText: 'Keine Einträge'
-    },
-    transfer: {
-      noMatch: 'Nichts gefunden.',
-      noData: 'Keine Einträge',
-      titles: ['Liste 1', 'Liste 2'],
-      filterPlaceholder: 'Einträge filtern',
-      noCheckedFormat: '{total} Einträge',
-      hasCheckedFormat: '{checked}/{total} ausgewählt'
+      emptyText: 'Keine Daten'
     }
   }
 };

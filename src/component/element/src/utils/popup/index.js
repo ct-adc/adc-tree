@@ -2,9 +2,41 @@ import Vue from 'vue';
 import merge from 'element-ui/src/utils/merge';
 import PopupManager from 'element-ui/src/utils/popup/popup-manager';
 import getScrollBarWidth from '../scrollbar-width';
-import { getStyle, addClass, removeClass, hasClass } from '../dom';
 
 let idSeed = 1;
+const transitions = [];
+
+const hookTransition = (transition) => {
+  if (transitions.indexOf(transition) !== -1) return;
+
+  const getVueInstance = (element) => {
+    let instance = element.__vue__;
+    if (!instance) {
+      const textNode = element.previousSibling;
+      if (textNode.__vue__) {
+        instance = textNode.__vue__;
+      }
+    }
+    return instance;
+  };
+
+  Vue.transition(transition, {
+    afterEnter(el) {
+      const instance = getVueInstance(el);
+
+      if (instance) {
+        instance.doAfterOpen && instance.doAfterOpen();
+      }
+    },
+    afterLeave(el) {
+      const instance = getVueInstance(el);
+
+      if (instance) {
+        instance.doAfterClose && instance.doAfterClose();
+      }
+    }
+  });
+};
 
 let scrollBarWidth;
 
@@ -18,9 +50,13 @@ const getDOM = function(dom) {
 
 export default {
   props: {
-    visible: {
+    value: {
       type: Boolean,
       default: false
+    },
+    transition: {
+      type: String,
+      default: ''
     },
     openDelay: {},
     closeDelay: {},
@@ -52,6 +88,12 @@ export default {
     }
   },
 
+  created() {
+    if (this.transition) {
+      hookTransition(this.transition);
+    }
+  },
+
   beforeMount() {
     this._popupId = 'popup-' + idSeed++;
     PopupManager.register(this._popupId, this);
@@ -60,22 +102,25 @@ export default {
   beforeDestroy() {
     PopupManager.deregister(this._popupId);
     PopupManager.closeModal(this._popupId);
-
-    this.restoreBodyStyle();
+    if (this.modal && this.bodyOverflow !== null && this.bodyOverflow !== 'hidden') {
+      document.body.style.overflow = this.bodyOverflow;
+      document.body.style.paddingRight = this.bodyPaddingRight;
+    }
+    this.bodyOverflow = null;
+    this.bodyPaddingRight = null;
   },
 
   data() {
     return {
       opened: false,
+      bodyOverflow: null,
       bodyPaddingRight: null,
-      computedBodyPaddingRight: 0,
-      withoutHiddenClass: false,
       rendered: false
     };
   },
 
   watch: {
-    visible(val) {
+    value(val) {
       if (val) {
         if (this._opening) return;
         if (!this.rendered) {
@@ -96,6 +141,7 @@ export default {
     open(options) {
       if (!this.rendered) {
         this.rendered = true;
+        this.$emit('input', true);
       }
 
       const props = merge({}, this.$props || this, options);
@@ -124,6 +170,11 @@ export default {
 
       this._opening = true;
 
+      // 使用 vue-popup 的组件，如果需要和父组件通信显示的状态，应该使用 value，它是一个 prop，
+      // 这样在父组件中用 v-model 即可；否则可以使用 visible，它是一个 data
+      this.visible = true;
+      this.$emit('input', true);
+
       const dom = getDOM(this.$el);
 
       const modal = props.modal;
@@ -140,18 +191,16 @@ export default {
         }
         PopupManager.openModal(this._popupId, PopupManager.nextZIndex(), this.modalAppendToBody ? undefined : dom, props.modalClass, props.modalFade);
         if (props.lockScroll) {
-          this.withoutHiddenClass = !hasClass(document.body, 'el-popup-parent--hidden');
-          if (this.withoutHiddenClass) {
+          if (!this.bodyOverflow) {
             this.bodyPaddingRight = document.body.style.paddingRight;
-            this.computedBodyPaddingRight = parseInt(getStyle(document.body, 'paddingRight'), 10);
+            this.bodyOverflow = document.body.style.overflow;
           }
           scrollBarWidth = getScrollBarWidth();
           let bodyHasOverflow = document.documentElement.clientHeight < document.body.scrollHeight;
-          let bodyOverflowY = getStyle(document.body, 'overflowY');
-          if (scrollBarWidth > 0 && (bodyHasOverflow || bodyOverflowY === 'scroll') && this.withoutHiddenClass) {
-            document.body.style.paddingRight = this.computedBodyPaddingRight + scrollBarWidth + 'px';
+          if (scrollBarWidth > 0 && bodyHasOverflow) {
+            document.body.style.paddingRight = scrollBarWidth + 'px';
           }
-          addClass(document.body, 'el-popup-parent--hidden');
+          document.body.style.overflow = 'hidden';
         }
       }
 
@@ -164,7 +213,9 @@ export default {
 
       this.onOpen && this.onOpen();
 
-      this.doAfterOpen();
+      if (!this.transition) {
+        this.doAfterOpen();
+      }
     },
 
     doAfterOpen() {
@@ -193,29 +244,33 @@ export default {
     },
 
     doClose() {
+      this.visible = false;
+      this.$emit('input', false);
       this._closing = true;
 
       this.onClose && this.onClose();
 
       if (this.lockScroll) {
-        setTimeout(this.restoreBodyStyle, 200);
+        setTimeout(() => {
+          if (this.modal && this.bodyOverflow !== 'hidden') {
+            document.body.style.overflow = this.bodyOverflow;
+            document.body.style.paddingRight = this.bodyPaddingRight;
+          }
+          this.bodyOverflow = null;
+          this.bodyPaddingRight = null;
+        }, 200);
       }
 
       this.opened = false;
 
-      this.doAfterClose();
+      if (!this.transition) {
+        this.doAfterClose();
+      }
     },
 
     doAfterClose() {
       PopupManager.closeModal(this._popupId);
       this._closing = false;
-    },
-
-    restoreBodyStyle() {
-      if (this.modal && this.withoutHiddenClass) {
-        document.body.style.paddingRight = this.bodyPaddingRight;
-        removeClass(document.body, 'el-popup-parent--hidden');
-      }
     }
   }
 };

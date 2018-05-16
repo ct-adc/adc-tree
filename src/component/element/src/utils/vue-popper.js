@@ -16,10 +16,6 @@ const stop = e => e.stopPropagation();
  */
 export default {
   props: {
-    transformOrigin: {
-      type: [Boolean, String],
-      default: true
-    },
     placement: {
       type: String,
       default: 'bottom'
@@ -35,10 +31,7 @@ export default {
     },
     value: Boolean,
     visibleArrow: Boolean,
-    arrowOffset: {
-      type: Number,
-      default: 35
-    },
+    transition: String,
     appendToBody: {
       type: Boolean,
       default: true
@@ -102,35 +95,23 @@ export default {
 
       options.placement = this.currentPlacement;
       options.offset = this.offset;
-      options.arrowOffset = this.arrowOffset;
       this.popperJS = new PopperJS(reference, popper, options);
       this.popperJS.onCreate(_ => {
         this.$emit('created', this);
         this.resetTransformOrigin();
         this.$nextTick(this.updatePopper);
       });
-      if (typeof options.onUpdate === 'function') {
-        this.popperJS.onUpdate(options.onUpdate);
-      }
       this.popperJS._popper.style.zIndex = PopupManager.nextZIndex();
       this.popperElm.addEventListener('click', stop);
     },
 
     updatePopper() {
-      const popperJS = this.popperJS;
-      if (popperJS) {
-        popperJS.update();
-        if (popperJS._popper) {
-          popperJS._popper.style.zIndex = PopupManager.nextZIndex();
-        }
-      } else {
-        this.createPopper();
-      }
+      this.popperJS ? this.popperJS.update() : this.createPopper();
     },
 
-    doDestroy(forceDestroy) {
+    doDestroy() {
       /* istanbul ignore if */
-      if (!this.popperJS || (this.showPopper && !forceDestroy)) return;
+      if (this.showPopper || !this.popperJS) return;
       this.popperJS.destroy();
       this.popperJS = null;
     },
@@ -142,7 +123,6 @@ export default {
     },
 
     resetTransformOrigin() {
-      if (!this.transformOrigin) return;
       let placementMap = {
         top: 'bottom',
         bottom: 'top',
@@ -151,9 +131,7 @@ export default {
       };
       let placement = this.popperJS._popper.getAttribute('x-placement').split('-')[0];
       let origin = placementMap[placement];
-      this.popperJS._popper.style.transformOrigin = typeof this.transformOrigin === 'string'
-        ? this.transformOrigin
-        : ['top', 'bottom'].indexOf(placement) > -1 ? `center ${ origin }` : `${ origin } center`;
+      this.popperJS._popper.style.transformOrigin = ['top', 'bottom'].indexOf(placement) > -1 ? `center ${ origin }` : `${ origin } center`;
     },
 
     appendArrow(element) {
@@ -183,7 +161,7 @@ export default {
   },
 
   beforeDestroy() {
-    this.doDestroy(true);
+    this.doDestroy();
     if (this.popperElm && this.popperElm.parentNode === document.body) {
       this.popperElm.removeEventListener('click', stop);
       document.body.removeChild(this.popperElm);

@@ -1,48 +1,28 @@
-<script>
-  import Emitter from 'element-ui/src/mixins/emitter';
+<script type="es6">
+    import Emitter from 'element-ui/src/mixins/emitter';
 
-  export default {
-    name: 'ElCheckboxGroup',
+    export default {
+        name: 'ElCheckboxGroup',
 
-    componentName: 'ElCheckboxGroup',
+        componentName: 'ElCheckboxGroup',
 
-    mixins: [Emitter],
+        mixins: [Emitter],
 
-    inject: {
-      elFormItem: {
-        default: ''
-      }
-    },
+        props: {
+            value: {}
+        },
 
-    props: {
-      value: {},
-      disabled: Boolean,
-      min: Number,
-      max: Number,
-      size: String,
-      fill: String,
-      textColor: String
-    },
-
-    computed: {
-      _elFormItemSize() {
-        return (this.elFormItem || {}).elFormItemSize;
-      },
-      checkboxGroupSize() {
-        return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
-      }
-    },
-
-    watch: {
-      value(value) {
-        this.dispatch('ElFormItem', 'el.form.change', [value]);
-      }
-    }
-  };
+        watch: {
+            value(value) {
+                this.dispatch('ElFormItem', 'el.form.change', [value]);
+            }
+        }
+    };
 </script>
 
 <template>
-  <div class="el-checkbox-group" role="group" aria-label="checkbox-group">
-    <slot></slot>
-  </div>
+    <div class="el-checkbox-group">
+        <slot></slot>
+    </div>
 </template>
+

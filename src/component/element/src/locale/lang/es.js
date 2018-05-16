@@ -2,60 +2,56 @@ export default {
   el: {
     colorpicker: {
       confirm: 'Confirmar',
-      clear: 'Despejar'
+      clear: 'Limpiar'
     },
     datepicker: {
       now: 'Ahora',
       today: 'Hoy',
       cancel: 'Cancelar',
-      clear: 'Despejar',
+      clear: 'Limpiar',
       confirm: 'Confirmar',
       selectDate: 'Seleccionar fecha',
       selectTime: 'Seleccionar hora',
-      startDate: 'Fecha Incial',
-      startTime: 'Hora Inicial',
+      startDate: 'Fecha de Inicio',
+      startTime: 'Hora de Inicio',
       endDate: 'Fecha Final',
       endTime: 'Hora Final',
-      prevYear: 'Año Anterior',
-      nextYear: 'Próximo Año',
-      prevMonth: 'Mes Anterior',
-      nextMonth: 'Próximo Mes',
-      year: '',
-      month1: 'enero',
-      month2: 'febrero',
-      month3: 'marzo',
-      month4: 'abril',
-      month5: 'mayo',
-      month6: 'junio',
-      month7: 'julio',
-      month8: 'agosto',
-      month9: 'septiembre',
-      month10: 'octubre',
-      month11: 'noviembre',
-      month12: 'diciembre',
+      year: 'Año',
+      month1: 'Enero',
+      month2: 'Febrero',
+      month3: 'Marzo',
+      month4: 'Abril',
+      month5: 'Mayo',
+      month6: 'Junio',
+      month7: 'Julio',
+      month8: 'Agosto',
+      month9: 'Septiembre',
+      month10: 'Octubre',
+      month11: 'Noviembre',
+      month12: 'Diciembre',
       // week: 'semana',
       weeks: {
-        sun: 'dom',
-        mon: 'lun',
-        tue: 'mar',
-        wed: 'mié',
-        thu: 'jue',
-        fri: 'vie',
-        sat: 'sáb'
+        sun: 'Dom',
+        mon: 'Lun',
+        tue: 'Mar',
+        wed: 'Mié',
+        thu: 'Jue',
+        fri: 'Vie',
+        sat: 'Sáb'
       },
       months: {
-        jan: 'ene',
-        feb: 'feb',
-        mar: 'mar',
-        apr: 'abr',
-        may: 'may',
-        jun: 'jun',
-        jul: 'jul',
-        aug: 'ago',
-        sep: 'sep',
-        oct: 'oct',
-        nov: 'nov',
-        dec: 'dic'
+        jan: 'Ene',
+        feb: 'Feb',
+        mar: 'Mar',
+        apr: 'Abr',
+        may: 'May',
+        jun: 'Jun',
+        jul: 'Jul',
+        aug: 'Ago',
+        sep: 'Sep',
+        oct: 'Oct',
+        nov: 'Nov',
+        dec: 'Dic'
       }
     },
     select: {
@@ -66,12 +62,11 @@ export default {
     },
     cascader: {
       noMatch: 'No hay datos que coincidan',
-      loading: 'Cargando',
       placeholder: 'Seleccionar'
     },
     pagination: {
       goto: 'Ir a',
-      pagesize: '/página',
+      pagesize: '/pagina',
       total: 'Total {total}',
       pageClassifier: ''
     },
@@ -81,7 +76,6 @@ export default {
       error: 'Entrada inválida'
     },
     upload: {
-      deleteTip: 'press delete to remove', // to be translated
       delete: 'Eliminar',
       preview: 'Vista Previa',
       continue: 'Continuar'
@@ -89,20 +83,11 @@ export default {
     table: {
       emptyText: 'Sin Datos',
       confirmFilter: 'Confirmar',
-      resetFilter: 'Reiniciar',
-      clearFilter: 'Despejar',
-      sumText: 'Suma'
+      resetFilter: 'Limpiar',
+      clearFilter: 'Todo'
     },
     tree: {
       emptyText: 'Sin Datos'
-    },
-    transfer: {
-      noMatch: 'No hay datos que coincidan',
-      noData: 'Sin datos',
-      titles: ['Lista 1', 'Lista 2'],
-      filterPlaceholder: 'Ingresar palabra clave',
-      noCheckedFormat: '{total} artículos',
-      hasCheckedFormat: '{checked}/{total} revisados'
     }
   }
 };

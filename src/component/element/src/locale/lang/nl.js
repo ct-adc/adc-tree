@@ -2,7 +2,7 @@ export default {
   el: {
     colorpicker: {
       confirm: 'Bevestig',
-      clear: 'Wissen'
+      clear: 'Legen'
     },
     datepicker: {
       now: 'Nu',
@@ -16,11 +16,7 @@ export default {
       startTime: 'Starttijd',
       endDate: 'Einddatum',
       endTime: 'Eindtijd',
-      prevYear: 'Vorig jaar',
-      nextYear: 'Volgend jaar',
-      prevMonth: 'Vorige maand',
-      nextMonth: 'Volgende maand',
-      year: '',
+      year: 'Jaar',
       month1: 'januari',
       month2: 'februari',
       month3: 'maart',
@@ -66,12 +62,11 @@ export default {
     },
     cascader: {
       noMatch: 'Geen overeenkomende resultaten',
-      loading: 'Laden',
       placeholder: 'Selecteer'
     },
     pagination: {
       goto: 'Ga naar',
-      pagesize: '/pagina',
+      pagesize: '/page',
       total: 'Totaal {total}',
       pageClassifier: ''
     },
@@ -82,7 +77,6 @@ export default {
       error: 'Ongeldige invoer'
     },
     upload: {
-      deleteTip: 'Kies verwijder om te wissen',
       delete: 'Verwijder',
       preview: 'Voorbeeld',
       continue: 'Doorgaan'
@@ -91,19 +85,10 @@ export default {
       emptyText: 'Geen data',
       confirmFilter: 'Bevestigen',
       resetFilter: 'Reset',
-      clearFilter: 'Alles',
-      sumText: 'Som'
+      clearFilter: 'Alles'
     },
     tree: {
       emptyText: 'Geen data'
-    },
-    transfer: {
-      noMatch: 'Geen overeenkomende resultaten',
-      noData: 'Geen data',
-      titles: ['Lijst 1', 'Lijst 2'],
-      filterPlaceholder: 'Geef zoekwoerd',
-      noCheckedFormat: '{total} items',
-      hasCheckedFormat: '{checked}/{total} geselecteerd'
     }
   }
 };

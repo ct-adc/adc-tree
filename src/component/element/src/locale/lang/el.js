@@ -1,7 +1,7 @@
 export default {
   el: {
     colorpicker: {
-      confirm: 'Εντάξει',
+      confirm: 'OK',
       clear: 'Καθαρισμός'
     },
     datepicker: {
@@ -9,17 +9,13 @@ export default {
       today: 'Σήμερα',
       cancel: 'Ακύρωση',
       clear: 'Καθαρισμός',
-      confirm: 'Εντάξει',
+      confirm: 'OK',
       selectDate: 'Επιλέξτε ημέρα',
       selectTime: 'Επιλέξτε ώρα',
       startDate: 'Ημερομηνία Έναρξης',
       startTime: 'Ωρα Έναρξης',
       endDate: 'Ημερομηνία Λήξης',
       endTime: 'Ωρα Λήξης',
-      prevYear: 'Προηγούμενο Έτος',
-      nextYear: 'Επόμενο Έτος',
-      prevMonth: 'Προηγούμενος Μήνας',
-      nextMonth: 'Επόμενος Μήνας',
       year: 'Έτος',
       month1: 'Ιανουάριος',
       month2: 'Φεβρουάριος',
@@ -64,11 +60,6 @@ export default {
       noData: 'Χωρίς δεδομένα',
       placeholder: 'Επιλογή'
     },
-    cascader: {
-      noMatch: 'Δεν βρέθηκαν αποτελέσματα',
-      loading: 'Φόρτωση',
-      placeholder: 'Επιλογή'
-    },
     pagination: {
       goto: 'Μετάβαση σε',
       pagesize: '/σελίδα',
@@ -77,12 +68,11 @@ export default {
     },
     messagebox: {
       title: 'Μήνυμα',
-      confirm: 'Εντάξει',
+      confirm: 'OK',
       cancel: 'Ακύρωση',
       error: 'Άκυρη εισαγωγή'
     },
     upload: {
-      deleteTip: 'Πάτησε Διαγραφή για αφαίρεση',
       delete: 'Διαγραφή',
       preview: 'Προεπισκόπηση',
       continue: 'Συνέχεια'
@@ -91,19 +81,10 @@ export default {
       emptyText: 'Χωρίς Δεδομένα',
       confirmFilter: 'Επιβεβαίωση',
       resetFilter: 'Επαναφορά',
-      clearFilter: 'Όλα',
-      sumText: 'Σύνολο'
+      clearFilter: 'Όλα'
     },
     tree: {
       emptyText: 'Χωρίς Δεδομένα'
-    },
-    transfer: {
-      noMatch: 'Δεν βρέθηκαν αποτελέσματα',
-      noData: 'Χωρίς δεδομένα',
-      titles: ['Λίστα 1', 'Λίστα 2'],
-      filterPlaceholder: 'Αναζήτηση',
-      noCheckedFormat: '{total} Αντικείμενα',
-      hasCheckedFormat: '{checked}/{total} checked' // to be translated
     }
   }
 };

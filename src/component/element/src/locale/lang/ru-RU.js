@@ -16,10 +16,6 @@ export default {
       startTime: 'Время начала',
       endDate: 'Дата окончания',
       endTime: 'Время окончания',
-      prevYear: 'Предыдущий год',
-      nextYear: 'Следующий год',
-      prevMonth: 'Предыдущий месяц',
-      nextMonth: 'Следующий месяц',
       year: '',
       month1: 'Январь',
       month2: 'Февраль',
@@ -66,12 +62,11 @@ export default {
     },
     cascader: {
       noMatch: 'Совпадений не найдено',
-      loading: 'Загрузка',
       placeholder: 'Выбрать'
     },
     pagination: {
       goto: 'Перейти',
-      pagesize: ' на странице',
+      pagesize: '/page',
       total: 'Всего {total}',
       pageClassifier: ''
     },
@@ -82,7 +77,6 @@ export default {
       error: 'Недопустимый ввод данных'
     },
     upload: {
-      deleteTip: 'Нажмите [Удалить] для удаления',
       delete: 'Удалить',
       preview: 'Превью',
       continue: 'Продолжить'
@@ -91,19 +85,10 @@ export default {
       emptyText: 'Нет данных',
       confirmFilter: 'Подтвердить',
       resetFilter: 'Сбросить',
-      clearFilter: 'Все',
-      sumText: 'Сумма'
+      clearFilter: 'Все'
     },
     tree: {
       emptyText: 'Нет данных'
-    },
-    transfer: {
-      noMatch: 'Совпадений не найдено',
-      noData: 'Нет данных',
-      titles: ['Список 1', 'Список 2'],
-      filterPlaceholder: 'Введите ключевое слово',
-      noCheckedFormat: '{total} пунктов',
-      hasCheckedFormat: '{checked}/{total} выбрано'
     }
   }
 };
