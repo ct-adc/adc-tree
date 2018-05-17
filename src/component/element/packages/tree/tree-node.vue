@@ -1,7 +1,7 @@
 <template>
     <div class="el-tree-node"
          @click.stop="handleClick"
-         v-show="node.visible"
+         v-if="node.visible"
          :class="{
       'is-expanded': childNodeRendered && expanded,
       'is-current': tree.store.currentNode === node,
@@ -30,7 +30,7 @@
         <collapse-transition>
             <template v-if="!childNodeRendered">
                 <div class="el-tree-node__children"
-                     v-if="expanded">
+                     v-show="expanded">
                     <el-tree-node
                             :render-content="renderContent"
                             v-for="child in node.childNodes"
@@ -52,8 +52,6 @@
                     </el-tree-node>
                 </div>
             </template>
-
-
         </collapse-transition>
     </div>
 </template>

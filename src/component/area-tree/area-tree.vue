@@ -2,7 +2,7 @@
     <div class="panel panel-default">
         <div class="p10" style="border-bottom: 1px solid #ddd;" v-if="hasFilter">
             <div class="input-group">
-                <input type="text" class="form-control" v-model="filterText">
+                <input type="text" class="form-control" v-model="filterText" placeholder="请输入地区名称搜索">
                 <div class="input-group-addon" @click="filter" style="cursor: pointer;">搜索</div>
             </div>
         </div>
@@ -19,6 +19,7 @@
                     node-key="ID"
                     @check-change="checkedChange"
                     render-after-expand
+                    accordion
                     :filter-node-method="filterNode"
                     ref="areaList">
                 </tree>
@@ -41,12 +42,16 @@
         components: {
             tree
         },
+        model: {
+            prop: 'value',
+            event: 'change'
+        },
         props: {
             sep: {
                 type: String,
                 default: '-'
             },
-            selected: {
+            value: {
                 type: [Array, String],
                 default() {
                     return [];
@@ -54,7 +59,11 @@
             },
             hasFilter: {
                 type: Boolean,
-                default: true
+                default: false
+            },
+            readable: {
+                type: Boolean,
+                default: false
             }
         },
         data() {
@@ -65,10 +74,7 @@
             };
         },
         mounted() {
-            // this.$refs.areaList.setCheckedNodes([{ID: '0601', Name: '杭州'}]);
-            // this.$refs.areaList.setCheckedKeys(['0601']);
-            console.log(this.selected);
-            this.setChecked(this.selected);
+            this.setChecked(this.value);
         },
         computed: {
             isEmpty(){
@@ -110,7 +116,6 @@
                 } else {
                     return filtered;
                 }
-
             },
             setChecked(areaToAdd) {
                 var nodes = [];
@@ -139,15 +144,12 @@
                         });
                     }
                 }
-                console.log(nodes);
                 this.$refs.areaList.setCheckedNodes(nodes);
             },
             checkedChange() {
-                console.log('change');
-                var that = this;
-                setTimeout(function() {
-                    that.$emit('change', that.getChecked(true));
-                })
+                this.$nextTick(()=>{
+                    this.$emit('change', this.getChecked(this.readable));
+                });
                 //父节点的change会触发所有子节点的change，所以需要放在异步事件中$emit事件，保证值的正确性
             },
             filterNode(value, data){
@@ -182,8 +184,10 @@
             }
         },
         watch: {
-            selected(newVal) {
-                this.setChecked(newVal)
+            value(newVal, oldVal) {
+                if (JSON.stringify(newVal) !== JSON.stringify(oldVal)){
+                    this.setChecked(newVal);
+                }
             }
         }
     }

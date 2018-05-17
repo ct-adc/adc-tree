@@ -32,7 +32,8 @@ module.exports = {
         modules:['src/component','node_modules'],
         extensions: ['.js', '.json','.vue','.css'],
         alias: {
-            'vue$': 'vue/dist/vue.common.js'
+            'vue$': 'vue/dist/vue.common.js',
+            'element-ui': path.resolve('src/component/element')
         }
     },
     externals: {

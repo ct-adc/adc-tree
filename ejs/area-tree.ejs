@@ -25,7 +25,12 @@
     </div>
     <div class="col-sm-4">
       <div>
-        <area-tree :selected="areaToAddAuto" ref="areaTree" :sep="sep" @change="change">
+        <area-tree v-model="area" 
+        ref="areaTree" 
+        has-filter
+        readable
+        :sep="sep" 
+        @change="change">
 
         </area-tree>
       </div>
@@ -46,7 +51,7 @@
       </div>
     </div>
   </div>
-
+{{area}}
 
   <div class="text-center mt20">
     <button type="button" class="btn btn-primary" @click="setChecked">设置选中地区</button>

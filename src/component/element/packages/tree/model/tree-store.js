@@ -56,8 +56,13 @@ export default class TreeStore {
                 }
             }
 
-            if(!value) return;
-            if (node.visible && !node.isLeaf) node.expand();
+            if(!value){
+                if(typeof node.collapse === 'function'){
+                    node.collapse();
+                }
+            } else if (node.visible){
+                node.expand();
+            }
         };
 
         traverse(this);
