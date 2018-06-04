@@ -10,8 +10,7 @@ new Vue({
         'area-tree': areaTree
     },
     data: {
-        area: ['浙江_杭州', '江苏_苏州'],
-        areaToAddAuto: '',
+        areaToAddAuto: ['浙江-杭州'],
         areaToAddManually: '',
         resultWithId: '',
         resultWithName: '',

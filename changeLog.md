@@ -1,5 +1,19 @@
 ## 更新日志
 
+### 2.0.0-alpha.2
+
+*2018-06-04*
+
+- 新增 去除v-model支持
+
+- tree更新至v2.4.0 
+
+- tree 修复bug lazy为true时不会如果setcheckednodes不会在父级节点上半选 tree-store L231
+
+备注：default checked在初始化时只考虑到第一层的数据，匹配第一层的数据后才进行setchecked处理，故规避使用
+default-checked-keys属性，用mounted时手动设置checked替代。
+node的setChecked会考虑是否加载数据的情况，因此setChecked可以解决lazy下的数据初始化工作。
+
 ### 2.0.0-alpha.1
 
 *2018-05-17*

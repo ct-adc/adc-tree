@@ -1,5 +1,8 @@
 var path = require('path');
 var webpack = require('webpack');
+function resolve (dir) {
+    return path.join(__dirname, '..', dir)
+  }
 module.exports = {
     entry: {
         index:'./src/component/index.js'
@@ -33,7 +36,7 @@ module.exports = {
         extensions: ['.js', '.json','.vue','.css'],
         alias: {
             'vue$': 'vue/dist/vue.common.js',
-            'element-ui': path.resolve('src/component/element')
+            'element-ui': resolve('src/component/element')
         }
     },
     externals: {

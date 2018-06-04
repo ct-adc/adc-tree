@@ -2,7 +2,7 @@
     <div class="panel panel-default">
         <div class="p10" style="border-bottom: 1px solid #ddd;" v-if="hasFilter">
             <div class="input-group">
-                <input type="text" class="form-control" v-model="filterText" placeholder="请输入地区名称搜索">
+                <input type="text" class="form-control" v-model="filterText">
                 <div class="input-group-addon" @click="filter" style="cursor: pointer;">搜索</div>
             </div>
         </div>
@@ -13,13 +13,13 @@
                 </div>
                 <tree v-show="!isEmpty"
                     show-checkbox 
-                    :props="{label: 'Name', isLeaf: 'isLeaf'}"
+                    :props="{label: 'Name', isLeaf: 'isLeaf', children: 'children'}"
                     :load="loadNode"
                     lazy
                     node-key="ID"
+                    check-descendants
                     @check-change="checkedChange"
                     render-after-expand
-                    accordion
                     :filter-node-method="filterNode"
                     ref="areaList">
                 </tree>
@@ -30,7 +30,7 @@
 
 <script>
     import Vue from 'vue';
-    import tree from 'element/packages/tree/tree.vue';
+    import tree from 'element/packages/tree/src/tree.vue';
     import dataTransfer from './model/data-transfer.js';
     import utility from 'ct-utility';
     import loading from 'ct-adc-loading';
@@ -42,16 +42,12 @@
         components: {
             tree
         },
-        model: {
-            prop: 'value',
-            event: 'change'
-        },
         props: {
             sep: {
                 type: String,
                 default: '-'
             },
-            value: {
+            selected: {
                 type: [Array, String],
                 default() {
                     return [];
@@ -59,11 +55,7 @@
             },
             hasFilter: {
                 type: Boolean,
-                default: false
-            },
-            readable: {
-                type: Boolean,
-                default: false
+                default: true
             }
         },
         data() {
@@ -74,7 +66,7 @@
             };
         },
         mounted() {
-            this.setChecked(this.value);
+            this.setChecked(this.selected);
         },
         computed: {
             isEmpty(){
@@ -116,6 +108,7 @@
                 } else {
                     return filtered;
                 }
+
             },
             setChecked(areaToAdd) {
                 var nodes = [];
@@ -136,20 +129,25 @@
                 if (areaList.length > 0) {
                     if (/^\d+$/.test(areaList[0] + '')) {
                         areaList.map((item) => {
-                            nodes = nodes.concat(dataTransfer.getNodesById(item + ''));
+                            nodes.push({
+                                ID: item
+                            });
                         });
                     } else {
                         areaList.map((item) => {
-                            nodes = nodes.concat(dataTransfer.getNodesByName(item));
+                            nodes.push({
+                                ID: utility.areaDataFormat.getAreaIdByName(item)
+                            });
                         });
                     }
                 }
                 this.$refs.areaList.setCheckedNodes(nodes);
             },
             checkedChange() {
-                this.$nextTick(()=>{
-                    this.$emit('change', this.getChecked(this.readable));
-                });
+                var that = this;
+                setTimeout(function() {
+                    that.$emit('change', that.getChecked(true));
+                })
                 //父节点的change会触发所有子节点的change，所以需要放在异步事件中$emit事件，保证值的正确性
             },
             filterNode(value, data){
@@ -184,10 +182,8 @@
             }
         },
         watch: {
-            value(newVal, oldVal) {
-                if (JSON.stringify(newVal) !== JSON.stringify(oldVal)){
-                    this.setChecked(newVal);
-                }
+            selected(newVal) {
+                this.setChecked(newVal)
             }
         }
     }
