@@ -3,43 +3,6 @@
  */
 import utility from 'ct-utility';
 export default{
-    loadNode(node, resolve, matchedByQuery) {
-        if (node.level === 0) {
-            if (!matchedByQuery){
-                return resolve(AREA.province);
-            } else {
-                return resolve(AREA.province.filter(province=>{
-                    const provinceID = province.ID;
-                    
-                    return this.isVisibleById(provinceID, matchedByQuery);
-                }));
-            }
-        }
-        if (node.level === 1 && AREA.city[node.data.Name]) {
-            if (!matchedByQuery){
-                return resolve(AREA.city[node.data.Name]);
-            } else {
-                return resolve(AREA.city[node.data.Name].filter(city=>{
-                    const cityID = city.ID;
-
-                    return this.isVisibleById(cityID, matchedByQuery);
-                }));
-            }
-        } else if (node.level === 2 && AREA.region[node.data.Name]) {
-            if (!matchedByQuery){
-                return resolve(AREA.region[node.data.Name].map(item=>{item.isLeaf = true; return item;}));
-            } else {
-                return resolve(AREA.region[node.data.Name].filter(region=>{
-                    region.isLeaf = true;
-                    const regionID = region.ID;
-                    
-                    return this.isVisibleById(regionID, matchedByQuery);
-                }));
-            };
-        } else {
-            return resolve([]);
-        }
-    },
     getIdsByQueryStr(query){
         const provinceList = utility.areaDataFormat.getProvinceList();
         const cityList = utility.areaDataFormat.getCityList();
