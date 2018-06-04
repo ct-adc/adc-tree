@@ -25,7 +25,7 @@
     </div>
     <div class="col-sm-4">
       <div>
-        <area-tree :selected="areaToAddAuto" ref="areaTree" :sep="sep" @change="change">
+        <area-tree v-model="areaToAddAuto" ref="areaTree" :sep="sep" @change="change">
 
         </area-tree>
       </div>

@@ -41,6 +41,10 @@
         components: {
             tree
         },
+        model: {
+            prop: 'selected',
+            event: 'change'
+        },
         props: {
             sep: {
                 type: String,
