@@ -13,10 +13,11 @@
                 </div>
                 <tree v-show="!isEmpty"
                     show-checkbox 
-                    :props="{label: 'Name', isLeaf: 'isLeaf'}"
+                    :props="{label: 'Name', isLeaf: 'isLeaf', children: 'children'}"
                     :load="loadNode"
                     lazy
                     node-key="ID"
+                    check-descendants
                     @check-change="checkedChange"
                     render-after-expand
                     :filter-node-method="filterNode"
@@ -29,7 +30,7 @@
 
 <script>
     import Vue from 'vue';
-    import tree from 'element/packages/tree/tree.vue';
+    import tree from 'element/packages/tree/src/tree.vue';
     import dataTransfer from './model/data-transfer.js';
     import utility from 'ct-utility';
     import loading from 'ct-adc-loading';
@@ -40,10 +41,6 @@
         name: 'area-tree',
         components: {
             tree
-        },
-        model: {
-            prop: 'selected',
-            event: 'change'
         },
         props: {
             sep: {
@@ -132,15 +129,18 @@
                 if (areaList.length > 0) {
                     if (/^\d+$/.test(areaList[0] + '')) {
                         areaList.map((item) => {
-                            nodes = nodes.concat(dataTransfer.getNodesById(item + ''));
+                            nodes.push({
+                                ID: item
+                            });
                         });
                     } else {
                         areaList.map((item) => {
-                            nodes = nodes.concat(dataTransfer.getNodesByName(item));
+                            nodes.push({
+                                ID: utility.areaDataFormat.getAreaIdByName(item)
+                            });
                         });
                     }
                 }
-                nodes=[{ID: '0601'}];
                 this.$refs.areaList.setCheckedNodes(nodes);
             },
             checkedChange() {
