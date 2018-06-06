@@ -2,7 +2,7 @@
     <div class="panel panel-default">
         <div class="p10" style="border-bottom: 1px solid #ddd;" v-if="hasFilter">
             <div class="input-group">
-                <input type="text" class="form-control" v-model="filterText">
+                <input type="text" class="form-control" v-model="filterText" placeholder="请输入地区名称搜索">
                 <div class="input-group-addon" @click="filter" style="cursor: pointer;">搜索</div>
             </div>
         </div>

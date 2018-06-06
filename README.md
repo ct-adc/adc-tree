@@ -42,11 +42,14 @@ new Vue({
 
 ```
 
-## v-model
+## props
 
-绑定一个数组
+参数 | 说明 | 类型 | 默认值 | 可选值 | 描述 |
+--- | --- | --- | --- | ---- | ---
+sep | 地区分隔符 | String | '-'
+selected | 需要选中的地区 | String | Array | []
 
-### v-model绑定的数组格式
+### selected格式
 
 *支持字符串*: 以',|，'分隔单个地区的字符串如'浙江-杭州,江苏'或'0601,04')
 
@@ -54,13 +57,6 @@ new Vue({
 
 *支持JSON字符串*: 如["0601"]或["浙江-杭州"]，`请勿误用['0601']、['浙江-杭州']等非法JSON，会导致结果非预期`。
 
-## props
-
-参数 | 说明 | 类型 | 默认值 | 可选值 | 描述 |
---- | --- | --- | --- | ---- | ---
-sep | 地区分隔符 | String | '-'
-readable | v-model绑定的值输出 | Boolean | false | true/false | true时输出为中文名,false时输出为ID
-hasFilter | 是否带搜索框 | Boolean | false | true/false | 是否带搜索框
 
 ## 方法
 
