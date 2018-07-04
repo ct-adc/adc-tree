@@ -148,7 +148,7 @@
                 setTimeout(function() {
                     that.$emit('change', {
                         name: that.getChecked(true),
-                        code: that.getChecked(false)
+                        id: that.getChecked(false)
                     });
                 })
                 //父节点的change会触发所有子节点的change，所以需要放在异步事件中$emit事件，保证值的正确性
