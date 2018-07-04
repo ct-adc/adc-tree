@@ -51,6 +51,12 @@ module.exports = {
             commonjs2: 'vue',
             amd: 'vue',
             root: 'vue'
+        },
+        'deepmerge': {
+            commonjs: 'deepmerge',
+            commonjs2: 'deepmerge',
+            amd: 'deepmerge',
+            root: 'deepmerge'
         }
     }
 };
